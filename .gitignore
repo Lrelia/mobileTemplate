@@ -1,8 +1,6 @@
 .sass-cache
 css
 pack
-img/icon/*
-img/*.*
 
 *.min.js
 node_modules
