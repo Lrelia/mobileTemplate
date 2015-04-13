@@ -45,6 +45,57 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+        copy: {
+            main: {
+                files: [
+                    {
+                        src: 'css/home.min.css',
+                        dest: 'pack/',
+                        filter: 'isFile'
+                    },
+                    {
+                        src: 'js/home.min.js',
+                        dest: 'pack/',
+                        filter: 'isFile'
+                    },
+                    {
+                        src: 'index.html',
+                        dest: 'pack/',
+                        filter: 'isFile'
+                    },
+                    {
+                        src: 'img/*',
+                        dest: 'pack/',
+                        filter: 'isFile'
+                    }
+                ]
+            }
+        },
+        compress: {
+            main: {
+                options: {
+                    archive: 'archive.zip'
+                },
+                files: [
+                    {src: ['pack/*'], dest: '', filter: 'isFile'},
+                    {src: ['pack/css/*'], dest: '', filter: 'isFile'},
+                    {src: ['pack/js/*'], dest: '', filter: 'isFile'},
+                    {src: ['pack/img/*'], dest: '', filter: 'isFile'}
+                ]
+            }
+        },
+        compass: {
+            dist: {
+                options: {
+                    sassDir: 'sass',
+                    specify: ['sass/sprite.sass'],
+                    imagesDir: "img",
+                    relativeAssets: true,
+                    cssDir: 'css',
+                    outputStyle: 'expanded'
+                }
+            }
         }
     });
 
@@ -62,8 +113,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     // 加载 css 精灵
     grunt.loadNpmTasks('grunt-contrib-compass');
+    // 加载 copy 插件
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // 注册事件
     grunt.registerTask('docss', ['sass:main', 'cssmin:main']);
     grunt.registerTask('dojs', ['uglify:main']);
+    grunt.registerTask('docopy', ['copy:main']);
+    grunt.registerTask('docompress', ['compress:main']);
+    grunt.registerTask('docompass', ['compass']);
 };
