@@ -1,2 +1,4 @@
-(function(win, doc) {
-})(window, document)
+(function() {
+
+
+}).call(this);

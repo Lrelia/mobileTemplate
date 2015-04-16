@@ -3,6 +3,16 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        coffee: {
+            'main': {
+                files: [
+                    {
+                        src: 'js/home.coffee',
+                        dest: 'js/home.js'
+                    }
+                ]
+            }
+        },
         uglify: {
             options: {
                 banner: '/* 移动开发 <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -12,7 +22,7 @@ module.exports = function(grunt) {
                     {
                         src: 'js/home.js',
                         dest: 'js/home.min.js'
-                    },
+                    }
                 ]
             }
         },
@@ -22,7 +32,7 @@ module.exports = function(grunt) {
                 tasks: ['docss']
             },
             'main-js': {
-                files: ['js/*.js'],
+                files: ['js/*.coffee'],
                 tasks: ['dojs']
             }
         },
@@ -120,7 +130,7 @@ module.exports = function(grunt) {
 
     // 注册事件
     grunt.registerTask('docss', ['sass:main', 'cssmin:main']);
-    grunt.registerTask('dojs', ['uglify:main']);
+    grunt.registerTask('dojs', ['coffee:main', 'uglify:main']);
     grunt.registerTask('docopy', ['copy:main']);
     grunt.registerTask('docompress', ['compress:main']);
     grunt.registerTask('docompass', ['compass']);
