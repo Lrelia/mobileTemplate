@@ -115,6 +115,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     // 加载 copy 插件
     grunt.loadNpmTasks('grunt-contrib-copy');
+    // 加载 coffee 插件
+    grunt.loadNpmTasks('grunt-contrib-coffee');
 
     // 注册事件
     grunt.registerTask('docss', ['sass:main', 'cssmin:main']);
