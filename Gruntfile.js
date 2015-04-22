@@ -96,7 +96,7 @@ module.exports = function(grunt) {
             }
         },
         compass: {
-            dist: {
+            main: {
                 options: {
                     sassDir: 'sass',
                     specify: ['sass/sprite.sass'],
@@ -105,6 +105,11 @@ module.exports = function(grunt) {
                     cssDir: 'css',
                     outputStyle: 'expanded'
                 }
+            }
+        },
+        'font-spider': {
+            main: {
+                src: '*.html'
             }
         }
     });
@@ -127,11 +132,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     // 加载 coffee 插件
     grunt.loadNpmTasks('grunt-contrib-coffee');
+    // 加载 fontspider 字蛛
+    grunt.loadNpmTasks('grunt-font-spider');
 
     // 注册事件
     grunt.registerTask('docss', ['sass:main', 'cssmin:main']);
     grunt.registerTask('dojs', ['coffee:main', 'uglify:main']);
     grunt.registerTask('docopy', ['copy:main']);
     grunt.registerTask('docompress', ['compress:main']);
-    grunt.registerTask('docompass', ['compass']);
+    grunt.registerTask('docompass', ['compass:main']);
+    grunt.registerTask('dofontspider', ['font-spider:main']);
 };
